@@ -15,17 +15,15 @@ const app = express();
 connectDB();
 
 // Middleware for parsing JSON data and handling CORS
-app.use(express.json());
-app.use(cors({
-    origin: [
-        "http://localhost:3000",  // Allow for local development
-        "https://real-time-chat-app-1-ctof.onrender.com" // Allow frontend in production
-    ],
-    credentials: true,  // Allow cookies, authentication tokens
+const corsOptions = {
+    origin: ["https://real-time-chat-app-1-ctof.onrender.com"],  // Change this to match your frontend URL
+    credentials: true,  // Required for cookies/auth
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-}));
+};
 
+app.use(cors(corsOptions));
+app.use(express.json());
 
 // Serve static files from the React app
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -43,14 +41,13 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
     cors: {
-        origin: [
-            "http://localhost:3000",
-            "https://real-time-chat-app-1-ctof.onrender.com"
-        ],
+        origin: ["https://real-time-chat-app-1-ctof.onrender.com"],
         methods: ["GET", "POST"],
-        credentials: true, // ✅ Allows WebSockets to use authentication
-    }
+        credentials: true
+    },
+    allowEIO3: true // Fix for older WebSocket versions
 });
+
 
 
 // Socket.io event handling
