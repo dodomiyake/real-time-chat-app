@@ -11,7 +11,7 @@ This real-time chat application is built using the **MERN stack** (MongoDB, Expr
 ✅ Persistent login session  
 ✅ Input validation and error handling  
 ✅ Typing indicator  
-✅ Message timestamps 
+✅ Message timestamps  
 ✅ Group chatrooms  
 ✅ Message timestamps  
 
