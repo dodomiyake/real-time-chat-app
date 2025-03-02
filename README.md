@@ -1,7 +1,7 @@
 # Real-Time Chat Application (MERN Stack)
 
 ## Overview
-This is a real-time chat application built using the **MERN stack** (MongoDB, Express.js, React, and Node.js). It supports real-time messaging with **Socket.io** and authentication using **JWT & Cookies**.
+This real-time chat application is built using the **MERN stack** (MongoDB, Express.js, React, and Node.js). It supports real-time messaging with **Socket.io** and authentication using **JWT & Cookies**.
 
 ## Features
 ✅ User authentication (Register/Login) with JWT and HTTP-only cookies  
@@ -10,8 +10,9 @@ This is a real-time chat application built using the **MERN stack** (MongoDB, Ex
 ✅ Auto-scroll for new messages  
 ✅ Persistent login session  
 ✅ Input validation and error handling  
-✅ Typing indicator (Future Enhancement)  
-✅ Message timestamps (Future Enhancement)  
+✅ Typing indicator  
+✅ Message timestamps  
+✅ Group chatrooms  
 
 ## Tech Stack
 - **Frontend:** React.js, CSS
@@ -85,12 +86,6 @@ Go to `http://localhost:3000` in your browser.
 | `sendMessage` | Send a message to a room |
 | `receiveMessage` | Receive messages in real time |
 
-## Future Enhancements
-- ✅ Add message timestamps
-- ✅ Display user avatars
-- ✅ Implement dark mode
-- ✅ Show typing indicator
-- ✅ Support group chat rooms
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
