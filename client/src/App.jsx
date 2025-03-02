@@ -9,6 +9,11 @@ import Navbar from "./components/Navbar";
 
 const socket = io("http://localhost:5000");
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+console.log("API Base URL:", API_BASE_URL); // ✅ Debugging
+
+
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [room, setRoom] = useState("General");
@@ -66,7 +71,8 @@ export default function App() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch("http://localhost:5000/api/user/profile", {
+      console.log("Fetching user from:", API_BASE_URL + "/api/user/profile");
+      const response = await fetch("${API_BASE_URL}/api/user/profile", {
         method: "GET",
         credentials: "include"
       });

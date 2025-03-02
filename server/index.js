@@ -37,7 +37,8 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000',
+        origin: 'http://localhost:3000' || 'https://your-backend-on-render.com' || process.env.CLIENT_URL,
+',
         methods: ['GET', 'POST']
     }
 });

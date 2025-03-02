@@ -1,37 +1,52 @@
-const User = require('../models/User');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // Check if the user already exists
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-            return res.status(400).json({ msg: 'User already exists' });
+        // ✅ Ensure required fields are provided
+        if (!username || !password) {
+            return res.status(400).json({ msg: "All fields are required" });
         }
 
-        // Hash the password
+        // ✅ Check if the user already exists
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ msg: "User already exists" });
+        }
+
+        // ✅ Hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Create a new user
+        // ✅ Create and save new user
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
 
-        // Create a JWT token immediately after the user is created
-        const token = jwt.sign({ userId: newUser._id, username: newUser.username }, process.env.JWT_SECRET, { expiresIn: '1d' });
+        // ✅ Generate JWT Token
+        const token = jwt.sign(
+            { userId: newUser._id, username: newUser.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
 
-        res.cookie('token', token, {
+        // ✅ Set Secure Cookie (Cross-Origin Fix)
+        res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'Strict'
-        }).status(201).json({ msg: 'User created successfully', user: { username: newUser.username, id: newUser._id } });
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "None" // ✅ Fix for cross-origin cookies
+        });
+
+        res.status(201).json({
+            msg: "User created successfully",
+            user: { username: newUser.username, id: newUser._id }
+        });
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: 'Server error' });
+        console.error("❌ Registration Error:", error);
+        res.status(500).json({ msg: "Server error" });
     }
 };
 
@@ -39,28 +54,37 @@ exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // Find user by username
+        // ✅ Ensure required fields are provided
+        if (!username || !password) {
+            return res.status(400).json({ msg: "All fields are required" });
+        }
+
+        // ✅ Find user by username
         const user = await User.findOne({ username });
-        if (!user) {
-            return res.status(400).json({ msg: 'Invalid credentials' });
+
+        // ✅ Check if user exists and password is correct
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(400).json({ msg: "Invalid credentials" });
         }
 
-        // Check if the password is correct
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ msg: 'Invalid credentials' });
-        }
+        // ✅ Generate JWT Token
+        const token = jwt.sign(
+            { userId: user._id, username: user.username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
 
-        // Create a JWT token
-        const token = jwt.sign({ userId: user._id, username: user.username }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-        res.cookie('token', token, {
+        // ✅ Set Secure Cookie (Cross-Origin Fix)
+        res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'Strict'
-        }).json({ user: { username: user.username, id: user._id } });
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "None" // ✅ Fix for cross-origin cookies
+        });
+
+        res.json({ user: { username: user.username, id: user._id } });
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ msg: 'Server error' });
+        console.error("❌ Login Error:", error);
+        res.status(500).json({ msg: "Server error" });
     }
 };
