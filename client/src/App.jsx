@@ -7,10 +7,11 @@ import "./styles/Chat.css";
 import Navbar from "./components/Navbar";
 
 
-const socket = io("http://localhost:5000");
+const socket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:5000", {
+  withCredentials: true
+});
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-console.log("API Base URL:", API_BASE_URL); // ✅ Debugging
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
 
 
@@ -140,9 +141,9 @@ export default function App() {
   const leaveRoom = () => {
     socket.emit("leaveRoom", { username: user.username, room });
 
-    // ✅ Reset room to "General" and clear messages
+    // Reset room to "General" and clear messages
     setRoom("General");
-    setMessages([]); // ✅ Clears messages when switching rooms
+    setMessages([]); // Clears messages when switching rooms
 
     socket.emit("joinRoom", { username: user.username, room: "General" });
   };
@@ -165,7 +166,7 @@ export default function App() {
             <option key={roomName} value={roomName}>{roomName}</option>
           ))}
         </select>
-        {room !== "General" && ( // ✅ Show "Leave Room" only if in a non-General room
+        {room !== "General" && ( // Show "Leave Room" only if in a non-General room
           <button onClick={leaveRoom} className="leave-room-button">Leave Room</button>
         )}
       </div>
@@ -177,7 +178,7 @@ export default function App() {
             className={`message ${msg.from === user.username ? "user" : "other"}`}
           >
             <div className="message-content">
-              {/* ✅ Display Avatar */}
+              {/* Display Avatar */}
               <img className="avatar" src={msg.avatar} alt="User Avatar" onError={(e) => e.target.src = "https://i.pravatar.cc/150?u=default"} />
               <div>
                 <strong>{msg.from}:</strong> {msg.content}
