@@ -1,8 +1,10 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://real-time-chat-app-k0cd.onrender.com";
+
 export const register = async (username, password) => {
-    const response = await fetch('http://localhost:5000/api/auth/register', {
+    const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),   // Send the username and password in the body
+        body: JSON.stringify({ username, password }),
         credentials: 'include' // This will send cookies along with the request
     });
 
@@ -11,18 +13,18 @@ export const register = async (username, password) => {
 
 
 export const login = async (username, password) => {
-    const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST', // Send a POST request
+    const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }), // Send the username and password in the body
-        credentials: 'include' // This will send cookies along with the request
+        body: JSON.stringify({ username, password }),
+        credentials: 'include'
     });
 
     return response.json();
 };
 
 export const logout = async () => {
-    await fetch('http://localhost:5000/api/auth/logout', {
+    await fetch(`${API_BASE_URL}/api/auth/logout`, {
         method: 'POST',
         credentials: 'include'
     });
