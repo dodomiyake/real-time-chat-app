@@ -10,8 +10,9 @@ This is a real-time chat application built using the **MERN stack** (MongoDB, Ex
 ✅ Auto-scroll for new messages  
 ✅ Persistent login session  
 ✅ Input validation and error handling  
-✅ Typing indicator (Future Enhancement)  
-✅ Message timestamps (Future Enhancement)  
+✅ Typing indicator 
+✅ Message timestamps 
+✅ Group chatrooms
 
 ## Tech Stack
 - **Frontend:** React.js, CSS
