@@ -12,7 +12,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL || "https://real-time-chat-app
   transports: ["websocket", "polling"]  // Ensures compatibility
 });
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://real-time-chat-app-k0cd.onrender.com"; //"http://localhost:5000"
 
 
 
@@ -76,7 +76,8 @@ export default function App() {
       console.log(`Fetching user from: ${API_BASE_URL}/api/user/profile`);
       const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
         method: "GET",
-        credentials: "include"
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
       });
 
       if (!response.ok) {
