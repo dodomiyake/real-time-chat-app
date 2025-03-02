@@ -17,8 +17,9 @@ connectDB();
 // Middleware for parsing JSON data and handling CORS
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000", "https://real-time-chat-app-1-ctof.onrender.com"],
-    credentials: true
+    origin: ["https://real-time-chat-app-1-ctof.onrender.com"], // http://localhost:3000
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 // Serve static files from the React app
@@ -37,9 +38,9 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:3000", "https://real-time-chat-app-1-ctof.onrender.com"],
-        methods: ['GET', 'POST'],
-        credentials: true  // Allow credentials (cookies, auth headers)
+        origin: ["https://real-time-chat-app-1-ctof.onrender.com"], // http://localhost:3000
+        methods: ["GET", "POST"],
+        credentials: true,
     }
 });
 

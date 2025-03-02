@@ -73,14 +73,18 @@ export default function App() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      console.log("Fetching user from:", API_BASE_URL + "/api/user/profile");
-      const response = await fetch("${API_BASE_URL}/api/user/profile", {
+      console.log(`Fetching user from: ${API_BASE_URL}/api/user/profile`);
+      const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
         method: "GET",
         credentials: "include"
       });
 
+      if (!response.ok) {
+        console.error("Failed to fetch user:", response.status);
+        return;
+      }
       const data = await response.json();
-      if (response.ok) setUser(data);
+      setUser(data);
     };
 
     fetchUser();

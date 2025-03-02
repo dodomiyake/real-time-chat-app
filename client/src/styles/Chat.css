@@ -127,7 +127,7 @@
 .typing-indicator {
   font-size: 0.9rem;
   font-style: italic;
-  color: gray;
+  color: rgb(97, 97, 97);
   margin-left: 10px;
   margin-top: 5px;
 }
