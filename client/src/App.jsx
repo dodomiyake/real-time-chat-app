@@ -11,7 +11,8 @@ const socket = io("http://localhost:5000");
 
 export default function App() {
   const [user, setUser] = useState(null);
-  const [room, setRoom] = useState("room1");
+  const [room, setRoom] = useState("General");
+  const [availableRooms, setAvailableRooms] = useState(["General", "Sports", "Tech", "Gaming"]);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
@@ -27,6 +28,26 @@ export default function App() {
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
+  useEffect(() => {
+    if (user) {
+      socket.emit("joinRoom", { username: user.username, room });
+
+      socket.on("userJoined", ({ username, room }) => {
+        console.log(`${username} joined ${room}`);
+      });
+
+      socket.on("userLeft", ({ username, room }) => {
+        console.log(`${username} left ${room}`);
+      });
+
+      return () => {
+        socket.emit("leaveRoom", { username: user.username, room });
+        socket.off("userJoined");
+        socket.off("userLeft");
+      };
+    }
+  }, [room, user]);
 
   useEffect(() => {
     if (user) {
@@ -99,12 +120,49 @@ export default function App() {
     }, 1000); // Stops typing after 1 sec of inactivity
   };
 
+  const changeRoom = (newRoom) => {
+    socket.emit("leaveRoom", { username: user.username, room });
+
+    // Clear messages when switching rooms
+    setMessages([]);
+
+    setRoom(newRoom);
+    socket.emit("joinRoom", { username: user.username, room: newRoom });
+  };
+
+
+  const leaveRoom = () => {
+    socket.emit("leaveRoom", { username: user.username, room });
+
+    // ✅ Reset room to "General" and clear messages
+    setRoom("General");
+    setMessages([]); // ✅ Clears messages when switching rooms
+
+    socket.emit("joinRoom", { username: user.username, room: "General" });
+  };
+
+
+
+
   return (
     <div className="chat-container">
       <Navbar user={user} setUser={setUser} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
 
+
+
       <div className="chat-header">Chat Room: {room}</div>
+      <div className="room-selector">
+        <label>Select a Room:</label>
+        <select value={room} onChange={(e) => changeRoom(e.target.value)}>
+          {availableRooms.map((roomName) => (
+            <option key={roomName} value={roomName}>{roomName}</option>
+          ))}
+        </select>
+        {room !== "General" && ( // ✅ Show "Leave Room" only if in a non-General room
+          <button onClick={leaveRoom} className="leave-room-button">Leave Room</button>
+        )}
+      </div>
 
       <div className="chat-messages">
         {messages.map((msg, index) => (

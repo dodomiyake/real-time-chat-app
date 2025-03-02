@@ -47,20 +47,38 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     console.log('New client connected:', socket.id);
 
-    socket.on('joinRoom', (roomId) => {
-        socket.join(roomId);
-        console.log(`Socket ${socket.id} joined room ${roomId}`);
+    socket.on('joinRoom', ({ username, room }) => {
+        if (!room) return; //  Prevent errors if no room is provided
+        socket.join(room);
+        console.log(`${username} joined room: ${room}`);
+
+        // Notify others in the room
+        socket.to(room).emit('userJoined', username, room);
     });
 
+
+
+    // Handle leave a room
+    socket.on("leaveRoom", ({ username, room }) => {
+        if (!room) return;
+        socket.leave(room);
+        console.log(`${username} left room: ${room}`);
+    
+        socket.to(room).emit("userLeft", { username, room });
+    });
+    
+
     // Typing event handler
-    socket.on('typing', ({ username, room}) => {
+    socket.on('typing', ({ username, room }) => {
         socket.to(room).emit('userTyping', username); // Broadcast typing event
     })
 
     // Stop typing event handler
-    socket.on('stopTyping', ({ room}) => {
+    socket.on('stopTyping', ({ room }) => {
         socket.to(room).emit('userStopTyping'); // Broadcast stop typing event
     })
+
+    
 
     socket.on('sendMessage', async (msgData) => { // Make function async
         try {
