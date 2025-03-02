@@ -163,8 +163,75 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
+/* 🌟 Fix Dark Mode Toggle & Logout Button Alignment */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adjust spacing */
+  }
+
+  .dark-mode-toggle {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    padding: 5px 6px;
+    background: black;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .logout-button {
+    font-size: 14px;
+    padding: 5px 6px;
+  }
+}
+
+/* 🌟 Fix Chat Input Alignment */
+@media (max-width: 768px) {
+  .chat-input {
+    flex-direction: row;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 99%;
+    background: white;
+  }
+
+  .chat-input input {
+    flex: 1;
+    font-size: 14px;
+    padding: 8px;
+    margin-right: 5px;
+  }
+
+  .chat-input button {
+    font-size: 14px;
+    padding: 8px 18px;
+    margin-right: 8px;
+  }
+}
+
+/* 🌟 Fix Chat Bubble Spacing */
+@media (max-width: 768px) {
   .message {
-    max-width: 90%;
+    max-width: 80%;
+    font-size: 14px;
+    padding: 8px;
+    margin: 5px 0;
+  }
+
+  .message .avatar {
+    width: 30px;
+    height: 30px;
   }
 }
