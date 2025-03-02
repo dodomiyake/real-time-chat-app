@@ -27,6 +27,12 @@
     font-size: 1.5rem;
 }
 
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adds spacing between buttons */
+}
+
 
 .logout-button {
     background-color: #0078c2;
@@ -42,7 +48,7 @@
 .logout-button:hover {
     background-color: #cc0000;
 }
-    
+
     
 .auth-container {
     display: flex;
@@ -57,3 +63,12 @@
 .navbar .logout-button.hidden {
     display: none;
 }
+
+.navbar-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+  

@@ -16,6 +16,17 @@ export default function App() {
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
 
+  const [ darkMode, setDarkMode ] = useState(() => {
+    return localStorage.getItem("darkMode") === "true"; // Load saved preference from localStorage
+  });
+
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+    localStorage.setItem("darkMode", darkMode); // Save user preference to localStorage
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch("http://localhost:5000/api/user/profile", {
@@ -65,7 +76,7 @@ export default function App() {
 
   return (
     <div className="chat-container">
-      <Navbar user={user} setUser={setUser} />
+      <Navbar user={user} setUser={setUser} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
 
       <div className="chat-header">Chat Room: {room}</div>

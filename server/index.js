@@ -3,6 +3,7 @@ const http = require('http');
 const cors = require('cors');
 require('dotenv').config();
 const User = require("./models/User");
+const path = require("path");
 
 // Import the DB connection function
 const connectDB = require('./config/db');
@@ -20,9 +21,14 @@ app.use(cors({
     credentials: true
 }));
 
+// Serve static files from the React app
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Import and use authentication routes
 app.use('/api/auth', require('./routes/authRoutes'));
+
+// Import and use user routes
+app.use('/api/users', require('./routes/userRoutes'));
 
 // Create an HTTP server for integrating Socket.io
 const server = http.createServer(app);

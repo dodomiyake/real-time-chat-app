@@ -3,7 +3,7 @@ import { logout } from "../services/auth";
 import logo from "../assets/chitchatlogo-01.svg"; // Ensure this path is correct
 import "../styles/Navbar.css"; // Import styles
 
-export default function Navbar({ user, setUser }) {
+export default function Navbar({ user, setUser, darkMode, toggleDarkMode }) {
     const handleLogout = async () => {
         try {
             await logout();
@@ -19,10 +19,15 @@ export default function Navbar({ user, setUser }) {
                 <img src={logo} alt="Chat Logo" />
                 <span className="logo-name">ChitChat</span>
             </div>
-            {/* ✅ Ensure the logout button appears when user logs in */}
-            {user && user.username ? (
-                <button className="logout-button" onClick={handleLogout}>Logout</button>
-            ) : null}
+            <div className="navbar-actions">
+                {/* ✅ Show Dark Mode toggle only if user is logged in */}
+                {user && (
+                    <button onClick={toggleDarkMode} className="dark-mode-toggle">
+                        {darkMode ? "Light Mode ☀️" : "Dark Mode 🌙"}
+                    </button>
+                )}
+                {user && <button className="logout-button" onClick={handleLogout}>Logout</button>}
+            </div>
         </nav>
     );
 }

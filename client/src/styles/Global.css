@@ -1,0 +1,27 @@
+/* Light Mode (Default) */
+body {
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #f4f4f4;
+}
+
+/* Navbar Dark Mode */
+.dark-mode .navbar {
+  background-color: #1e1e1e;
+}
+
+/* Chat Dark Mode */
+.dark-mode .chat-container {
+  background-color: #181818;
+  border-color: #333;
+}
+
+.dark-mode .message {
+  background-color: #242424;
+  color: white;
+}
