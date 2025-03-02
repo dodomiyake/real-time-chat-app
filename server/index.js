@@ -52,6 +52,16 @@ io.on('connection', (socket) => {
         console.log(`Socket ${socket.id} joined room ${roomId}`);
     });
 
+    // Typing event handler
+    socket.on('typing', ({ username, room}) => {
+        socket.to(room).emit('userTyping', username); // Broadcast typing event
+    })
+
+    // Stop typing event handler
+    socket.on('stopTyping', ({ room}) => {
+        socket.to(room).emit('userStopTyping'); // Broadcast stop typing event
+    })
+
     socket.on('sendMessage', async (msgData) => { // Make function async
         try {
             //  Fetch user from DB

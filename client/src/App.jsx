@@ -15,8 +15,9 @@ export default function App() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null);
+  const [typingUser, setTypingUser] = useState("");
 
-  const [ darkMode, setDarkMode ] = useState(() => {
+  const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("darkMode") === "true"; // Load saved preference from localStorage
   });
 
@@ -26,6 +27,21 @@ export default function App() {
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
+  useEffect(() => {
+    if (user) {
+      socket.on("userTyping", (username) => {
+        setTypingUser(username);
+      });
+      socket.on("userStopTyping", () => {
+        setTypingUser("");
+      });
+      return () => {
+        socket.off("userTyping");
+        socket.off("userStoppedTyping");
+      }
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -74,6 +90,15 @@ export default function App() {
     return <Auth setUser={setUser} />;
   }
 
+  const handleTyping = () => {
+    socket.emit("typing", { username: user.username, room });
+
+    clearTimeout(window.typingTimeout);
+    window.typingTimeout = setTimeout(() => {
+      socket.emit("stopTyping", { room });
+    }, 1000); // Stops typing after 1 sec of inactivity
+  };
+
   return (
     <div className="chat-container">
       <Navbar user={user} setUser={setUser} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
@@ -92,6 +117,10 @@ export default function App() {
               <img className="avatar" src={msg.avatar} alt="User Avatar" onError={(e) => e.target.src = "https://i.pravatar.cc/150?u=default"} />
               <div>
                 <strong>{msg.from}:</strong> {msg.content}
+                {typingUser && (
+                  <div className="typing-indicator">{typingUser} is typing...</div>
+                )}
+
                 <small className="timestamp">
                   {msg.timestamp ? format(new Date(msg.timestamp), "hh:mm a") : ""}
                 </small>
@@ -106,7 +135,10 @@ export default function App() {
         <input
           type="text"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => {
+            setMessage(e.target.value)
+            handleTyping()
+          }} // Typing Indicator
           placeholder="Type your message..."
         />
         <button onClick={sendMessage}>Send</button>
