@@ -7,8 +7,9 @@ import "./styles/Chat.css";
 import Navbar from "./components/Navbar";
 
 
-const socket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:5000", {
-  withCredentials: true
+const socket = io(import.meta.env.VITE_SOCKET_URL || "https://real-time-chat-app-k0cd.onrender.com", {
+  withCredentials: true,
+  transports: ["websocket", "polling"]  // Ensures compatibility
 });
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
