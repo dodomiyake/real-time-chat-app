@@ -4,7 +4,8 @@ import Auth from "./components/Auth";
 import { io } from "socket.io-client";
 import { format } from "date-fns";
 import "./styles/Chat.css";
-import logo from "./assets/chitchatlogo1.svg"
+import Navbar from "./components/Navbar";
+
 
 const socket = io("http://localhost:5000");
 
@@ -64,9 +65,10 @@ export default function App() {
 
   return (
     <div className="chat-container">
-      <div className="chat-header">
-        <div>Chat Room: {room}</div>
-      </div>
+      <Navbar user={user} setUser={setUser} />
+
+
+      <div className="chat-header">Chat Room: {room}</div>
 
       <div className="chat-messages">
         {messages.map((msg, index) => (
@@ -74,9 +76,7 @@ export default function App() {
             key={index}
             className={`message ${msg.from === user.username ? "user" : "other"}`}
           >
-            <div>
-              <strong>{msg.from}:</strong> {msg.content}
-            </div>
+            <strong>{msg.from}:</strong> {msg.content}
             <small className="timestamp">
               {msg.timestamp ? format(new Date(msg.timestamp), "hh:mm a") : ""}
             </small>
