@@ -63,10 +63,10 @@ io.on('connection', (socket) => {
         if (!room) return;
         socket.leave(room);
         console.log(`${username} left room: ${room}`);
-    
+
         socket.to(room).emit("userLeft", { username, room });
     });
-    
+
 
     // Typing event handler
     socket.on('typing', ({ username, room }) => {
@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
         socket.to(room).emit('userStopTyping'); // Broadcast stop typing event
     })
 
-    
+
 
     socket.on('sendMessage', async (msgData) => { // Make function async
         try {
@@ -111,6 +111,11 @@ io.on('connection', (socket) => {
 app.get('/', (req, res) => {
     res.send('Welcome to the Real-Time Chat App API!');
 });
+
+app.get('/api/test', (req, res) => {
+    res.json({ message: "API is working!" });
+});
+
 
 
 
