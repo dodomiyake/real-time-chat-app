@@ -22,7 +22,7 @@ export default function Navbar({ user, setUser, darkMode, toggleDarkMode }) {
             <div className="navbar-actions">
                 {/* ✅ Show Dark Mode toggle only if user is logged in */}
                 {user && (
-                    <button onClick={toggleDarkMode} className="dark-mode-toggle">
+                    <button onClick={toggleDarkMode} className="dark-mode-toggle dark-mode-button">
                         {darkMode ? "Light Mode ☀️" : "Dark Mode 🌙"}
                     </button>
                 )}

@@ -30,7 +30,9 @@
   flex-direction: column;
   gap: 10px;
   max-height: calc(100vh - 140px); /* Ensures messages fit within screen */
-  background: white;
+  background: #757f9a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #757f9a, #d7dde8); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #757f9a, #d7dde8);
   border-radius: 0;
 }
 
@@ -144,6 +146,7 @@
 .room-selector select {
   padding: 5px;
   font-size: 1rem;
+  margin-top: 3px;
 }
 
 .leave-room-button {
@@ -160,6 +163,13 @@
 
 .leave-room-button:hover {
   background-color: rgb(2, 86, 110);
+}
+
+.dark-mode-button {
+  background: black;
+  color: white;
+  border-radius: 5px;
+   padding: 5px 6px;
 }
 
 /* Responsive adjustments */
