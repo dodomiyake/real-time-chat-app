@@ -14,10 +14,10 @@ connectDB();
 
 // Middleware for parsing JSON data and handling CORS
 app.use(express.json());
-app.use(cors({ 
+app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
-     }));
+}));
 
 
 // Import and use authentication routes
@@ -45,8 +45,13 @@ io.on('connection', (socket) => {
     });
 
     socket.on('sendMessage', (msgData) => {
+        // Add timestamp before broadcasting the message
+        const messageWithTimestamp = {
+            ...msgData,
+            timestamp: new Date().toISOString()  // Add timestamp
+        };
         // Broadcast the message to everyone in the room
-        io.to(msgData.to).emit('receiveMessage', msgData);
+        io.to(msgData.to).emit('receiveMessage', messageWithTimestamp);
     });
 
     socket.on('disconnect', () => {
@@ -57,8 +62,8 @@ io.on('connection', (socket) => {
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Real-Time Chat App API!');
-  });
-  
+});
+
 
 
 // Define the port and start the server

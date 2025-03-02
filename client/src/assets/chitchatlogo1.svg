@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: .1em;
+      }
+
+      .cls-2 {
+        fill: #ff7859;
+        font-size: 11px;
+      }
+
+      .cls-3 {
+        letter-spacing: .09em;
+      }
+
+      .cls-4 {
+        fill: #e3e8e7;
+      }
+
+      .cls-5 {
+        letter-spacing: .07em;
+      }
+
+      .cls-6 {
+        letter-spacing: .1em;
+      }
+
+      .cls-7 {
+        font-family: FranklinGothic-Demi, 'Franklin Gothic Demi';
+        font-size: 38px;
+        font-weight: 300;
+      }
+
+      .cls-7, .cls-8 {
+        fill: #30325e;
+      }
+
+      .cls-9 {
+        letter-spacing: .08em;
+      }
+
+      .cls-10 {
+        fill: #00c3ad;
+      }
+
+      .cls-11 {
+        fill: #ff4653;
+      }
+
+      .cls-12 {
+        letter-spacing: .08em;
+      }
+
+      .cls-13 {
+        letter-spacing: .1em;
+      }
+
+      .cls-14 {
+        letter-spacing: .08em;
+      }
+
+      .cls-15 {
+        letter-spacing: .05em;
+      }
+
+      .cls-16 {
+        letter-spacing: .1em;
+      }
+
+      .cls-17 {
+        letter-spacing: .08em;
+      }
+
+      .cls-18 {
+        letter-spacing: .1em;
+      }
+
+      .cls-19 {
+        letter-spacing: .1em;
+      }
+    </style>
+  </defs>
+  <g id="OBJECTS">
+    <g>
+      <ellipse class="cls-4" cx="248.15" cy="261.84" rx="31.26" ry="7.47"/>
+      <g>
+        <path class="cls-8" d="M289.15,159.47c6.39,0,11.58,5.2,11.58,11.58v49.22c0,6.39-5.2,11.58-11.58,11.58h-33.17l-3.58,4.7-4.25,5.59-4.25-5.59-3.58-4.7h-33.17c-6.39,0-11.58-5.2-11.58-11.58v-49.22c0-6.39,5.2-11.58,11.58-11.58h82M289.15,147.55h-82c-12.98,0-23.5,10.52-23.5,23.5v49.22c0,12.98,10.52,23.5,23.5,23.5h27.26l13.74,18.06,13.74-18.06h27.26c12.98,0,23.5-10.52,23.5-23.5v-49.22c0-12.98-10.52-23.5-23.5-23.5h0Z"/>
+        <g>
+          <path class="cls-11" d="M263.57,191.89c-3.24,0-6.48-1.07-9.12-3.2l-3.31-2.67c-1.73-1.4-4.25-1.39-5.97,0l-3.31,2.67c-5.28,4.26-12.95,4.26-18.24,0l-3.31-2.67c-1.73-1.4-4.24-1.4-5.97,0-2.1,1.69-5.17,1.36-6.87-.73-1.69-2.1-1.36-5.17.73-6.87,5.28-4.26,12.95-4.26,18.24,0l3.31,2.67c1.73,1.4,4.24,1.4,5.97,0l3.31-2.67c5.28-4.26,12.95-4.26,18.24,0l3.31,2.67c1.73,1.4,4.24,1.4,5.97,0l3.31-2.67c5.28-4.26,12.95-4.26,18.24,0,2.1,1.69,2.43,4.77.73,6.87-1.69,2.1-4.77,2.43-6.87.73-1.73-1.4-4.24-1.4-5.97,0l-3.31,2.67c-2.64,2.13-5.88,3.2-9.12,3.2Z"/>
+          <path class="cls-10" d="M263.57,216.56c-3.24,0-6.48-1.07-9.12-3.2l-3.31-2.67c-1.73-1.4-4.25-1.4-5.97,0l-3.31,2.67c-5.28,4.26-12.95,4.26-18.24,0l-3.31-2.67c-1.73-1.4-4.24-1.4-5.97,0-2.1,1.69-5.17,1.36-6.87-.73-1.69-2.1-1.36-5.17.73-6.87,5.28-4.26,12.95-4.26,18.24,0l3.31,2.67c1.73,1.4,4.24,1.4,5.97,0l3.31-2.67c5.28-4.26,12.95-4.26,18.24,0l3.31,2.67c1.73,1.4,4.24,1.4,5.97,0l3.31-2.67c5.28-4.26,12.95-4.26,18.24,0,2.1,1.69,2.43,4.77.73,6.87-1.69,2.1-4.77,2.43-6.87.73-1.73-1.4-4.24-1.4-5.97,0l-3.31,2.67c-2.64,2.13-5.88,3.2-9.12,3.2Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <g id="TEXTS">
+    <g>
+      <text class="cls-7" transform="translate(151.71 328.01)"><tspan class="cls-1" x="0" y="0">CHI</tspan><tspan class="cls-16" x="70.89" y="0">T</tspan><tspan class="cls-1" x="93.13" y="0">CH</tspan><tspan class="cls-15" x="149.21" y="0">A</tspan><tspan class="cls-19" x="174.18" y="0">T</tspan></text>
+      <text class="cls-2" transform="translate(156.68 347.22)"><tspan class="cls-18" x="0" y="0">Connecting</tspan><tspan class="cls-5" x="68.46" y="0"> </tspan><tspan class="cls-9" x="72.1" y="0">y</tspan><tspan class="cls-18" x="78.87" y="0">ou</tspan><tspan class="cls-14" x="93.64" y="0"> </tspan><tspan class="cls-18" x="97.33" y="0">with</tspan><tspan class="cls-17" x="123.28" y="0"> </tspan><tspan class="cls-13" x="126.97" y="0">the</tspan><tspan class="cls-12" x="146.73" y="0"> </tspan><tspan class="cls-3" x="150.41" y="0">w</tspan><tspan class="cls-6" x="160.02" y="0">orld</tspan></text>
+    </g>
+  </g>
+</svg>
