@@ -55,7 +55,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 60px); / Leaves space for Navbar */
+    height: calc(100vh - 60px); /* Leaves space for Navbar */
     background-color: #f4f4f4;
 }
     
