@@ -13,6 +13,7 @@ This is a real-time chat application built using the **MERN stack** (MongoDB, Ex
 ✅ Typing indicator 
 ✅ Message timestamps 
 ✅ Group chatrooms
+✅ Message timestamps 
 
 ## Tech Stack
 - **Frontend:** React.js, CSS
