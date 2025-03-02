@@ -35,7 +35,7 @@ exports.register = async (req, res) => {
         // ✅ Set Secure Cookie (Cross-Origin Fix)
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: true,
             sameSite: "None" // ✅ Fix for cross-origin cookies
         });
 
@@ -77,7 +77,7 @@ exports.login = async (req, res) => {
         // ✅ Set Secure Cookie (Cross-Origin Fix)
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
+            secure: true,
             sameSite: "None" // ✅ Fix for cross-origin cookies
         });
 

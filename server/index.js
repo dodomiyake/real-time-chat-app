@@ -39,7 +39,7 @@ const io = new Server(server, {
     cors: {
         origin: ["http://localhost:3000", "https://real-time-chat-app-1-ctof.onrender.com"],
         methods: ['GET', 'POST'],
-        redentials: true  // Allow credentials (cookies, auth headers)
+        credentials: true  // Allow credentials (cookies, auth headers)
     }
 });
 
