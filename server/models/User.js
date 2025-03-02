@@ -10,6 +10,10 @@ const Userschema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    avatar: {
+        type: String,
+        default: "https://i.pravatar.cc/150?u=default" // Default avatar if none is provided
     }
 }, {
     timestamps: true

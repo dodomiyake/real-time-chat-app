@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 require('dotenv').config();
+const User = require("./models/User");
 
 // Import the DB connection function
 const connectDB = require('./config/db');
@@ -35,6 +36,7 @@ const io = new Server(server, {
     }
 });
 
+
 // Socket.io event handling
 io.on('connection', (socket) => {
     console.log('New client connected:', socket.id);
@@ -44,20 +46,32 @@ io.on('connection', (socket) => {
         console.log(`Socket ${socket.id} joined room ${roomId}`);
     });
 
-    socket.on('sendMessage', (msgData) => {
-        // Add timestamp before broadcasting the message
-        const messageWithTimestamp = {
-            ...msgData,
-            timestamp: new Date().toISOString()  // Add timestamp
-        };
-        // Broadcast the message to everyone in the room
-        io.to(msgData.to).emit('receiveMessage', messageWithTimestamp);
+    socket.on('sendMessage', async (msgData) => { // Make function async
+        try {
+            //  Fetch user from DB
+            const user = await User.findOne({ username: msgData.from });
+
+            //  Ensure valid avatar URL
+            const avatarUrl = user && user.avatar ? user.avatar : "https://i.pravatar.cc/150?u=default";
+
+            const messageWithAvatar = {
+                ...msgData,
+                timestamp: new Date().toISOString(),
+                avatar: avatarUrl
+            };
+
+            // Broadcast the message with avatar
+            io.to(msgData.to).emit('receiveMessage', messageWithAvatar);
+        } catch (error) {
+            console.error("Error sending message:", error);
+        }
     });
 
     socket.on('disconnect', () => {
         console.log('Client disconnected:', socket.id);
     });
 });
+
 
 
 app.get('/', (req, res) => {

@@ -109,6 +109,22 @@
     text-align: right;
   }
 
+/* Message container */
+.message-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User avatar */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
   .message {

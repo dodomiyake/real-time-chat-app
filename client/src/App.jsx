@@ -76,10 +76,16 @@ export default function App() {
             key={index}
             className={`message ${msg.from === user.username ? "user" : "other"}`}
           >
-            <strong>{msg.from}:</strong> {msg.content}
-            <small className="timestamp">
-              {msg.timestamp ? format(new Date(msg.timestamp), "hh:mm a") : ""}
-            </small>
+            <div className="message-content">
+              {/* ✅ Display Avatar */}
+              <img className="avatar" src={msg.avatar} alt="User Avatar" onError={(e) => e.target.src = "https://i.pravatar.cc/150?u=default"} />
+              <div>
+                <strong>{msg.from}:</strong> {msg.content}
+                <small className="timestamp">
+                  {msg.timestamp ? format(new Date(msg.timestamp), "hh:mm a") : ""}
+                </small>
+              </div>
+            </div>
           </div>
         ))}
         <div ref={messagesEndRef}></div>
